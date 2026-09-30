@@ -556,31 +556,23 @@ notes: document.querySelector('[name="Пожелания"]').value
 
 try {
 
-const response = await fetch(
-"https://script.google.com/macros/s/AKfycby6mJ5cDpPSoViVJy3eldUI8h-_fwvuqgvhCVRhbkOuWnLm0s4_sG9-Sw4TYIl771E_/exec",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(data)
-}
-);
+  const response = await fetch(
+    "https://script.google.com/macros/s/AKfycby6mJ5cDpPSoViVJy3eldUI8h-_fwvuqgvhCVRhbkOuWnLm0s4_sG9-Sw4TYIl771E_/exec",
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      mode: "no-cors"
+    }
+  );
 
-if(response.ok){
-alert("Спасибо! Ваша анкета успешно отправлена.");
-document.getElementById("guestForm").reset();
-}else{
-throw new Error("Ошибка отправки");
-}
+  alert("Спасибо! Ваша анкета успешно отправлена.");
+  document.getElementById("guestForm").reset();
 
-}
-catch(error){
+} catch (error) {
 
-console.error(error);
+  console.error(error);
 
-alert(
-"Произошла ошибка. Попробуйте ещё раз.");
+  alert("Произошла ошибка. Попробуйте ещё раз.");
 
 }
   
