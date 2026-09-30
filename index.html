@@ -414,7 +414,7 @@ box-shadow:0 20px 40px rgba(0,0,0,.08);
 Анкета гостя
 </h2>
 
-<form action="https://formsubmit.co/n-usacheva-2000@bk.ru" method="POST">
+<form id="guestForm">
 
 <input type="hidden" name="_subject" value="Новая анкета гостя">
 
@@ -510,12 +510,13 @@ placeholder="Аллергии, ограничения или пожелания"
 
 <script>
 
+<script>
+
 const weddingDate = new Date("2026-11-13T16:00:00");
 
-setInterval(()=>{
+setInterval(() => {
 
 const now = new Date();
-
 const diff = weddingDate - now;
 
 document.getElementById("days").innerHTML =
@@ -531,6 +532,52 @@ document.getElementById("seconds").innerHTML =
 Math.floor(diff/1000%60);
 
 },1000);
+
+
+document.getElementById("guestForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const data = {
+name: document.querySelector('[name="Имя"]').value,
+attendance: document.querySelector('[name="Присутствие"]').value,
+guests: document.querySelector('[name="Количество гостей"]')
+? document.querySelector('[name="Количество гостей"]').value
+: "1",
+food: document.querySelector('[name="Основное блюдо"]').value,
+drink: document.querySelector('[name="Алкоголь"]').value,
+notes: document.querySelector('[name="Пожелания"]').value
+};
+
+try {
+
+await fetch(
+"https://script.google.com/macros/s/AKfycbyAsXWnwX8FDVxdbMYFPDuMSVIFJR38Ck3u-V_EXpVtqNWXoOX3ttcrGJ85GCs-UNa_/exec",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+}
+);
+
+alert(
+"Спасибо! Ваша анкета успешно отправлена."
+);
+
+document.getElementById("guestForm").reset();
+
+}
+catch(error){
+
+alert(
+"Произошла ошибка. Попробуйте ещё раз."
+);
+
+}
+
+});
 
 </script>
 
