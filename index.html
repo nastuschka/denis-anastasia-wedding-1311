@@ -556,7 +556,7 @@ notes: document.querySelector('[name="Пожелания"]').value
 
 try {
 
-await fetch(
+const response = await fetch(
 "https://script.google.com/macros/s/AKfycby6mJ5cDpPSoViVJy3eldUI8h-_fwvuqgvhCVRhbkOuWnLm0s4_sG9-Sw4TYIl771E_/exec",
 {
 method:"POST",
@@ -575,7 +575,15 @@ throw new Error("Ошибка отправки");
 }
 
 }
+catch(error){
 
+console.error(error);
+
+alert(
+"Произошла ошибка. Попробуйте ещё раз.");
+
+}
+  
 });
 
 </script>
