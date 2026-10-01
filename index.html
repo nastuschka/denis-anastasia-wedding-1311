@@ -554,7 +554,18 @@ drink: document.querySelector('[name="Алкоголь"]').value,
 notes: document.querySelector('[name="Пожелания"]').value
 };
 
+  const submitBtn = document.querySelector(
+'#guestForm button[type="submit"]'
+);
+  
 try {
+
+  const submitBtn = document.querySelector(
+'#guestForm button[type="submit"]'
+);
+
+submitBtn.disabled = true;
+submitBtn.innerText = "Отправляем...";
 
   const response = await fetch(
     "https://script.google.com/macros/s/AKfycby6mJ5cDpPSoViVJy3eldUI8h-_fwvuqgvhCVRhbkOuWnLm0s4_sG9-Sw4TYIl771E_/exec",
@@ -572,7 +583,11 @@ try {
 
   console.error(error);
 
-  alert("Произошла ошибка. Попробуйте ещё раз.");
+  submitBtn.disabled = false;
+submitBtn.innerText = "Отправить анкету";
+
+document.getElementById("guestForm").style.display = "none";
+document.getElementById("successMessage").style.display = "block";
 
 }
   
